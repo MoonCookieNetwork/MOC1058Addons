@@ -1,0 +1,7 @@
+name: MOC1058Addon
+main: cn.mooncookie.bw1058addons.BedWars1058Addons
+version: 1.0
+author: FootClicker, YukiEnd
+depend:
+  - BedWars1058
+
