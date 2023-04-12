@@ -17,7 +17,7 @@ public class AFK implements Listener {
     private final JavaPlugin plugin;
     private final int AFKTime = 170; // s
     private final int kickTime = 180; // s
-    private final String kickMessage = "§c你已经挂机很久了，不动就会被踢出哦！";
+    private final String kickMessage = "§c你已经挂机很久了， 不动就会被踢出哦！";
     private final String warningMessage = "§c你将因挂机而被移出游戏。";
 
     public AFK(JavaPlugin plugin) {
