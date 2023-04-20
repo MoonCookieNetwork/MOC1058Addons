@@ -1,11 +1,15 @@
 package cn.mooncookie.bw1058addons.AfkKick;
 
+import com.andrei1058.bedwars.api.events.gameplay.GameEndEvent;
+import com.andrei1058.bedwars.api.events.player.PlayerLeaveArenaEvent;
+import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerLoginEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.PluginManager;
@@ -46,7 +50,7 @@ public class AFK implements Listener {
         new BukkitRunnable() {
             @Override
             public void run() {
-                for (Player player : plugin.getServer().getOnlinePlayers()) {
+                for (Player player : Bukkit.getOnlinePlayers()) {
                     long lastMoveTime = 0;
                     for (MetadataValue meta : player.getMetadata("lastMoveTime")) {
                         if (meta.getOwningPlugin().equals(plugin)) {
@@ -60,8 +64,8 @@ public class AFK implements Listener {
                     long currentTime = System.currentTimeMillis();
                     if (currentTime - lastMoveTime >= AFKTime * 1000L) {
                         if (currentTime - lastMoveTime >= kickTime * 1000L) {
-                            player.sendMessage(player.getDisplayName() + "因挂机离开了游戏。");
-                            player.kickPlayer("你因挂机超过" + kickTime + "秒而被移出。");
+                            player.sendMessage("§e&l" + player.getDisplayName() + "§c§l因挂机离开了游戏。");
+                            player.kickPlayer("§c§l你因挂机超过" + kickTime + "秒而被移出。");
                         } else if (currentTime - lastMoveTime >= 2 * 60 * 1000 && currentTime - lastMoveTime < 3 * 60 * 1000) {
                             player.sendMessage(warningMessage);
                             player.playSound(player.getLocation(), Sound.ORB_PICKUP, 1f, 1f);
@@ -72,6 +76,25 @@ public class AFK implements Listener {
                 }
             }
         }.runTaskTimer(plugin, 0, 20); // 每秒检查一次
+    }
+
+    @EventHandler
+    public void onPlayerLeaveArena(PlayerLeaveArenaEvent event) {
+        Player player = event.getPlayer();
+        player.removeMetadata("lastMoveTime", plugin);
+    }
+
+    @EventHandler
+    public void onPlayerLeave(PlayerQuitEvent event) {
+        Player player = event.getPlayer();
+        player.removeMetadata("lastMoveTime", plugin);
+    }
+
+    @EventHandler
+    public void onGameEnd(GameEndEvent event) {
+        for (Player player : event.getArena().getPlayers()) {
+            player.removeMetadata("lastMoveTime", plugin);
+        }
     }
 }
 
