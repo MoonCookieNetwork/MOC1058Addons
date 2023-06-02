@@ -15,9 +15,6 @@ public class OnGameEnd implements Listener {
             case "solo":
                 Group = "Bw_Solo";
                 break;
-            case "doubles":
-                Group = "Bw_Doubles";
-                break;
             case "4v4v4v4":
                 Group = "Bw_4v4v4v4";
                 break;

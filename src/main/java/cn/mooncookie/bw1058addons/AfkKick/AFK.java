@@ -64,7 +64,7 @@ public class AFK implements Listener {
                     long currentTime = System.currentTimeMillis();
                     if (currentTime - lastMoveTime >= AFKTime * 1000L) {
                         if (currentTime - lastMoveTime >= kickTime * 1000L) {
-                            player.sendMessage("§e&l" + player.getDisplayName() + "§c§l因挂机离开了游戏。");
+                            player.sendMessage("§e§l" + player.getDisplayName() + "§c§l因挂机离开了游戏。");
                             player.kickPlayer("§c§l你因挂机超过" + kickTime + "秒而被移出。");
                         } else if (currentTime - lastMoveTime >= 2 * 60 * 1000 && currentTime - lastMoveTime < 3 * 60 * 1000) {
                             player.sendMessage(warningMessage);

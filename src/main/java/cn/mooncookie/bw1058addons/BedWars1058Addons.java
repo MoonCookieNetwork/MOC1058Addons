@@ -15,7 +15,9 @@ import cn.mooncookie.bw1058addons.SpectatorSettings.SpectatorSettings;
 import cn.mooncookie.bw1058addons.SpongeAnimation.Particle.ParticleSupport;
 import cn.mooncookie.bw1058addons.SpongeAnimation.Particle.versions.Older;
 import cn.mooncookie.bw1058addons.SpongeAnimation.SpongePlaceListener;
-import cn.mooncookie.bw1058addons.TaskMessage.GameStatesListener;
+import cn.mooncookie.bw1058addons.StrikeEffect.BedDestoryListener;
+import cn.mooncookie.bw1058addons.StrikeEffect.FinalKillListener;
+import cn.mooncookie.bw1058addons.TaskMessage.Message;
 import com.andrei1058.bedwars.BedWars;
 import net.minecraft.server.v1_8_R3.MinecraftServer;
 import org.bukkit.ChatColor;
@@ -67,8 +69,10 @@ public class BedWars1058Addons extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new OnGameEnd(), this); // 游戏结束时自动重开
         getServer().getPluginManager().registerEvents(new SpectatorSettings(), this); // 旁观者设置
         getServer().getPluginManager().registerEvents(new SpongePlaceListener(), this); // 海绵动画
-        getServer().getPluginManager().registerEvents(new GameStatesListener(), this); // 海绵动画
         getServer().getPluginManager().registerEvents(new WaterWorkerHelmet(), this); // 水下呼吸头盔
+        getServer().getPluginManager().registerEvents(new FinalKillListener(), this); // 击杀闪电效果
+        getServer().getPluginManager().registerEvents(new BedDestoryListener(), this); // 床破坏闪电效果
+        new Message(BedWars1058Addons.getInstance()).runTaskTimer(BedWars1058Addons.getInstance(), 2400L, 3600L);
         AFK AFK = new AFK(this); //AFK检查
         AFK.startAFKCheck();
         registerCommand(); //注册指令
