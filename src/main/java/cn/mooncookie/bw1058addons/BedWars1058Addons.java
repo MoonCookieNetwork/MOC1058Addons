@@ -72,6 +72,7 @@ public class BedWars1058Addons extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new WaterWorkerHelmet(), this); // 水下呼吸头盔
         getServer().getPluginManager().registerEvents(new FinalKillListener(), this); // 击杀闪电效果
         getServer().getPluginManager().registerEvents(new BedDestoryListener(), this); // 床破坏闪电效果
+        getServer().getPluginManager().registerEvents(new RemakeMessage(), this);
         new Message(BedWars1058Addons.getInstance()).runTaskTimer(BedWars1058Addons.getInstance(), 2400L, 3600L);
         AFK AFK = new AFK(this); //AFK检查
         AFK.startAFKCheck();

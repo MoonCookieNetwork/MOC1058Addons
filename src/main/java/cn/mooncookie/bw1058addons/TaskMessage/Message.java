@@ -17,7 +17,7 @@ public class Message extends BukkitRunnable {
     @Override
     public void run() {
         for (Player player : Bukkit.getOnlinePlayers()) {
-            if (Arena.getArenaByPlayer(player).isPlayer(player)) {
+            if (Arena.isInArena(player)) {
                 player.sendMessage("§c§l如果你断开连接， 可在起床大厅输入/rejoin重新加入游戏。");
             }
         }

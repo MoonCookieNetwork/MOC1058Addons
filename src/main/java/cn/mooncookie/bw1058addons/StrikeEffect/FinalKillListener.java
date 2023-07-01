@@ -8,10 +8,15 @@ import org.bukkit.event.Listener;
 public class FinalKillListener implements Listener {
     @EventHandler
     public void onKill(PlayerKillEvent e) {
-        Player p1 = e.getVictim();
-        if (e.getKiller().getPlayer() == null) return;
         if (e.getCause().isFinalKill()) {
-            p1.getWorld().strikeLightningEffect(p1.getLocation());
+            if (e.getKiller().getPlayer() != null) {
+                Player p1 = e.getVictim();
+                try {
+                    p1.getWorld().strikeLightningEffect(p1.getLocation());
+                } catch (Exception exception) {
+                    // empty catch block
+                }
+            }
         }
     }
 }
